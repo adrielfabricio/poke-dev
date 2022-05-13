@@ -1,11 +1,11 @@
 import React, { useEffect, useState, Fragment } from 'react';
-import { View } from 'react-native';
 
 import requests from '../../services/requests';
 import Sprite from '../../components/Sprite';
 
 import MoveBadge from './MoveBadge';
-import PokemonDefault, { Pokemon } from './interfaces';
+import TypeBadge from './TypeBadge';
+import PokemonDefault, { Pokemon, Props } from './interfaces';
 import {
 	Container,
 	PokemonName,
@@ -15,11 +15,9 @@ import {
 	SectionView,
 	PokemonAbilitiesView,
 	PokemonMovesView,
+	PokemonTypeView,
 } from './styles';
-
-interface Props {
-	route: any;
-}
+import Loading from '../../components/Loading';
 
 const PokemonInfo: React.FC<Props> = ({ route }) => {
 	const { name } = route.params;
@@ -47,7 +45,7 @@ const PokemonInfo: React.FC<Props> = ({ route }) => {
 			showsHorizontalScrollIndicator={false}
 			showsVerticalScrollIndicator={false}
 			contentContainerStyle={{ paddingBottom: 20 }}>
-			{!loading && pokemon && pokemon.abilities && (
+			{!loading && pokemon && pokemon.abilities ? (
 				<Fragment>
 					{/* sprite & name */}
 					<PokemonSpriteAndNameView>
@@ -57,6 +55,11 @@ const PokemonInfo: React.FC<Props> = ({ route }) => {
 							<PokemonName>{`${pokemon.name
 								.charAt(0)
 								.toUpperCase()}${pokemon.name.slice(1)}`}</PokemonName>
+							<PokemonTypeView>
+								{pokemon.types.map(({ type }, index) => (
+									<TypeBadge key={index} name={type.name} />
+								))}
+							</PokemonTypeView>
 						</PokemonNameView>
 					</PokemonSpriteAndNameView>
 
@@ -92,6 +95,8 @@ const PokemonInfo: React.FC<Props> = ({ route }) => {
 						</PokemonMovesView>
 					</SectionView>
 				</Fragment>
+			) : (
+				<Loading />
 			)}
 		</Container>
 	);

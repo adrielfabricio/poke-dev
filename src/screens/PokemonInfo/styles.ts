@@ -26,6 +26,11 @@ export const PokemonNameView = styled.View({
 	marginLeft: 15,
 });
 
+export const PokemonTypeView = styled.View({
+	flexDirection: 'row',
+	alignItems: 'flex-start',
+});
+
 export const PokemonName = styled.Text({
 	color: colors.listText,
 	fontSize: 24,

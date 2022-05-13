@@ -1,3 +1,7 @@
+export interface Props {
+	route: any;
+}
+
 type Ability = {
 	id: number;
 	name: string;
