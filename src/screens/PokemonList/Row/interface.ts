@@ -3,4 +3,5 @@ export interface IRowProps {
 		name: string;
 		url: string;
 	};
+	handlePress?: () => void;
 }

@@ -16,8 +16,16 @@ const Routes: React.FC = () => {
 				screenOptions={{
 					header: props => <Header props={props} />,
 				}}>
-				<Stack.Screen name="Lista de Pokémons" component={PokemonList} />
-				<Stack.Screen name="Detalhe do Pokémon" component={PokemonInfo} />
+				<Stack.Screen
+					name="PokemonList"
+					component={PokemonList}
+					options={{ headerTitle: 'Lista de Pokémon' }}
+				/>
+				<Stack.Screen
+					name="PokemonInfo"
+					component={PokemonInfo}
+					options={{ headerTitle: 'Detalhe do Pokémon' }}
+				/>
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

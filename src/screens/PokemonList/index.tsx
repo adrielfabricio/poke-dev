@@ -8,7 +8,11 @@ import Row from './Row';
 import { IRowProps } from './Row/interface';
 import { Container, dividerStyle, flatList } from './styles';
 
-const PokemonList: React.FC = () => {
+interface Props {
+	navigation: any;
+}
+
+const PokemonList: React.FC<Props> = ({ navigation }) => {
 	const [limit] = useState(20);
 	const [offset, setOffset] = useState(0);
 	const [loading, setLoading] = useState(false);
@@ -37,7 +41,17 @@ const PokemonList: React.FC = () => {
 	}
 
 	function renderItem({ item }: IRowProps) {
-		return <Row key={item.name} item={item} />;
+		return (
+			<Row
+				key={item.name}
+				item={item}
+				handlePress={() =>
+					navigation.navigate('PokemonInfo', {
+						name: item.name,
+					})
+				}
+			/>
+		);
 	}
 
 	useEffect(() => {

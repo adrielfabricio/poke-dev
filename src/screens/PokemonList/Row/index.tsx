@@ -3,9 +3,9 @@ import Arrow from '../../../assets/arrow.svg';
 import { IRowProps } from './interface';
 import { Container, PokemonName } from './styles';
 
-const Row: React.FC<IRowProps> = ({ item }) => {
+const Row: React.FC<IRowProps> = ({ item, handlePress }) => {
 	return (
-		<Container>
+		<Container onPress={handlePress}>
 			<PokemonName>{item.name}</PokemonName>
 			<Arrow />
 		</Container>

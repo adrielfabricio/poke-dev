@@ -1,11 +1,11 @@
 import styled from 'styled-components/native';
 import colors from '../../../constants/color';
 
-export const Container = styled.View({
+export const Container = styled.Pressable({
 	flexDirection: 'row',
 	justifyContent: 'space-between',
 	alignItems: 'center',
-	marginVertical: 15,
+	paddingVertical: 15,
 });
 
 export const PokemonName = styled.Text({
