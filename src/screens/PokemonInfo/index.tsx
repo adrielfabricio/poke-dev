@@ -1,4 +1,5 @@
 import React, { useEffect, useState, Fragment } from 'react';
+import { Button } from 'react-native';
 
 import requests from '../../services/requests';
 import Sprite from '../../components/Sprite';
@@ -21,6 +22,7 @@ import {
 	ErrorContainer,
 	ErrorMessage,
 } from './styles';
+import colors from '../../constants/color';
 
 const PokemonInfo: React.FC<Props> = ({ route }) => {
 	const { name } = route.params;
@@ -28,19 +30,25 @@ const PokemonInfo: React.FC<Props> = ({ route }) => {
 	const [requestError, setRequestError] = useState(false);
 	const [pokemon, setPokemon] = useState<Pokemon>(PokemonDefault);
 
-	useEffect(() => {
-		async function getPokemon() {
-			setLoading(true);
-			try {
-				const response = await requests.getPokemon({ name });
-				setPokemon(response);
-				setLoading(false);
-			} catch (error: any) {
-				setLoading(false);
-				setRequestError(true);
-				console.error(error.response ? error.response.data : error);
-			}
+	async function getPokemon() {
+		setLoading(true);
+		try {
+			const response = await requests.getPokemon({ name });
+			setPokemon(response);
+			setLoading(false);
+			setRequestError(false);
+		} catch (error: any) {
+			setLoading(false);
+			setRequestError(true);
+			console.error(error.response ? error.response.data : error);
 		}
+	}
+
+	function handlePress() {
+		getPokemon();
+	}
+
+	useEffect(() => {
 		getPokemon();
 	}, []);
 
@@ -101,13 +109,18 @@ const PokemonInfo: React.FC<Props> = ({ route }) => {
 				</Fragment>
 			) : (
 				<Fragment>
-					{!requestError ? (
+					{requestError ? (
 						<ErrorContainer>
 							<ErrorMessage>
 								{
 									'Falha ao retornar informacoes do Pokemon. Verifique a conexao com internet ou contate o suporte.'
 								}
 							</ErrorMessage>
+							<Button
+								title="Aperte para recarregar"
+								onPress={handlePress}
+								color={colors.primary}
+							/>
 						</ErrorContainer>
 					) : (
 						<Loading />

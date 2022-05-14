@@ -7,7 +7,7 @@ export const Container = styled.View({
 });
 
 export const ErrorContainer = styled.View({
-	paddingHorizontal: 20,
+	paddingHorizontal: 25,
 });
 
 export const ErrorMessage = styled.Text({
@@ -15,6 +15,7 @@ export const ErrorMessage = styled.Text({
 	fontSize: 16,
 	fontWeight: 'bold',
 	textAlign: 'center',
+	marginBottom: 15,
 });
 
 export const flatList = {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, View } from 'react-native';
+import { Button, FlatList, View } from 'react-native';
 
+import colors from '../../constants/color';
 import requests from '../../services/requests';
 import Loading from '../../components/Loading';
 
@@ -19,9 +20,10 @@ interface Props {
 }
 
 const PokemonList: React.FC<Props> = ({ navigation }) => {
-	const [limit] = useState(20);
+	const [limit, setLimit] = useState(20);
 	const [offset, setOffset] = useState(0);
 	const [loading, setLoading] = useState(false);
+	const [refresh, setRefresh] = useState(false);
 	const [requestError, setRequestError] = useState(false);
 	const [pokemons, setPokemons] = useState<[]>([]);
 
@@ -29,15 +31,30 @@ const PokemonList: React.FC<Props> = ({ navigation }) => {
 		setLoading(true);
 		try {
 			const response: any = await requests.getPokemons({ limit, offset });
-			const queryPokemons: any = pokemons.concat(response.results);
+			const queryPokemons: any = refresh
+				? response.results
+				: pokemons.concat(response.results);
 			setPokemons(queryPokemons);
 			setOffset((prevState: any) => prevState + limit);
 			setLoading(false);
+			setRequestError(false);
+			setRefresh(false);
 		} catch (error: any) {
 			setLoading(false);
 			setRequestError(true);
 			console.error(error.response);
 		}
+	}
+
+	function resetData() {
+		setOffset(0);
+		setLimit(20);
+	}
+
+	function handlePress() {
+		setRefresh(true);
+		resetData();
+		getPokemons();
 	}
 
 	function renderFooter() {
@@ -85,6 +102,11 @@ const PokemonList: React.FC<Props> = ({ navigation }) => {
 					<ErrorMessage>
 						{'Erro durante a busca. Por favor, contate o suporte.'}
 					</ErrorMessage>
+					<Button
+						title="Aperte para recarregar"
+						onPress={handlePress}
+						color={colors.primary}
+					/>
 				</ErrorContainer>
 			)}
 		</Container>
