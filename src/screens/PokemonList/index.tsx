@@ -5,7 +5,7 @@ import requests from '../../services/requests';
 import Loading from '../../components/Loading';
 
 import Row from './Row';
-import { IRowProps } from './Row/interface';
+import { IRowProps } from './Row/interfaces';
 import {
 	Container,
 	dividerStyle,

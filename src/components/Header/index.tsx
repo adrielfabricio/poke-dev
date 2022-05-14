@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 
 import BackArrow from '../../assets/back_arrow.svg';
-import { IHeaderProps } from './interface';
+import { IHeaderProps } from './interfaces';
 import {
 	Container,
 	TitleView,

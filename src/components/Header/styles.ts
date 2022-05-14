@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import colors from '../../constants/color';
-import { IHeaderStyleProps } from './interface';
+import { IHeaderStyleProps } from './interfaces';
 
 export const Container = styled.View({
 	display: 'flex',

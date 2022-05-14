@@ -1,5 +1,5 @@
 import React from 'react';
-import { Props } from './interface';
+import { Props } from './interfaces';
 import { Container } from './styles';
 
 const Sprite: React.FC<Props> = ({ url, height = 96, width = 96 }) => {
