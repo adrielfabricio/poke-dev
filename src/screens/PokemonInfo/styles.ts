@@ -6,6 +6,21 @@ export const Container = styled.ScrollView({
 	padding: 15,
 });
 
+export const scrollViewContentContainerStyle = {
+	paddingBottom: 15,
+};
+
+export const ErrorContainer = styled.View({
+	paddingHorizontal: 20,
+});
+
+export const ErrorMessage = styled.Text({
+	color: colors.listText,
+	fontSize: 16,
+	fontWeight: 'bold',
+	textAlign: 'center',
+});
+
 export const SectionTitle = styled.Text({
 	color: colors.gray,
 	fontSize: 12,

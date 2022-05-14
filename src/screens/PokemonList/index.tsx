@@ -6,7 +6,13 @@ import Loading from '../../components/Loading';
 
 import Row from './Row';
 import { IRowProps } from './Row/interface';
-import { Container, dividerStyle, flatList } from './styles';
+import {
+	Container,
+	dividerStyle,
+	ErrorContainer,
+	ErrorMessage,
+	flatList,
+} from './styles';
 
 interface Props {
 	navigation: any;
@@ -16,6 +22,7 @@ const PokemonList: React.FC<Props> = ({ navigation }) => {
 	const [limit] = useState(20);
 	const [offset, setOffset] = useState(0);
 	const [loading, setLoading] = useState(false);
+	const [requestError, setRequestError] = useState(false);
 	const [pokemons, setPokemons] = useState<[]>([]);
 
 	async function getPokemons() {
@@ -28,6 +35,7 @@ const PokemonList: React.FC<Props> = ({ navigation }) => {
 			setLoading(false);
 		} catch (error: any) {
 			setLoading(false);
+			setRequestError(true);
 			console.error(error.response);
 		}
 	}
@@ -60,7 +68,7 @@ const PokemonList: React.FC<Props> = ({ navigation }) => {
 
 	return (
 		<Container>
-			{pokemons && (
+			{pokemons && !requestError ? (
 				<FlatList
 					style={flatList.style}
 					contentContainerStyle={flatList.containerStyle}
@@ -72,6 +80,12 @@ const PokemonList: React.FC<Props> = ({ navigation }) => {
 					onEndReachedThreshold={0.1}
 					ListFooterComponent={renderFooter}
 				/>
+			) : (
+				<ErrorContainer>
+					<ErrorMessage>
+						{'Erro durante a busca. Por favor, contate o suporte.'}
+					</ErrorMessage>
+				</ErrorContainer>
 			)}
 		</Container>
 	);

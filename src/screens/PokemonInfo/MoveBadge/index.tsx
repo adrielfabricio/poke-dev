@@ -1,13 +1,7 @@
 import React from 'react';
 
+import { Props } from './interfaces';
 import { Container, MoveName } from './style';
-
-interface Props {
-	move: {
-		name: string;
-		url: string;
-	};
-}
 
 const MoveBadge: React.FC<Props> = ({ move }) => {
 	return (

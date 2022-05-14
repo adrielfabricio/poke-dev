@@ -6,7 +6,9 @@ import { Container, PokemonName } from './styles';
 const Row: React.FC<IRowProps> = ({ item, handlePress }) => {
 	return (
 		<Container onPress={handlePress}>
-			<PokemonName>{item.name}</PokemonName>
+			<PokemonName>
+				{`${item.name.charAt(0).toUpperCase()}${item.name.slice(1)}`}
+			</PokemonName>
 			<Arrow />
 		</Container>
 	);

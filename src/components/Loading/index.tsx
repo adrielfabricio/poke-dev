@@ -1,11 +1,12 @@
 import React from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import colors from '../../constants/color';
+import { Container } from './styles';
 
 const Loading: React.FC = () => (
-	<View style={{ marginHorizontal: 10 }}>
+	<Container>
 		<ActivityIndicator size={'large'} color={colors.gray} />
-	</View>
+	</Container>
 );
 
 export default Loading;

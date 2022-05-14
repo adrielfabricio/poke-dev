@@ -6,6 +6,17 @@ export const Container = styled.View({
 	justifyContent: 'center',
 });
 
+export const ErrorContainer = styled.View({
+	paddingHorizontal: 20,
+});
+
+export const ErrorMessage = styled.Text({
+	color: colors.listText,
+	fontSize: 16,
+	fontWeight: 'bold',
+	textAlign: 'center',
+});
+
 export const flatList = {
 	style: {},
 	containerStyle: { marginHorizontal: 20, paddingTop: 10 },

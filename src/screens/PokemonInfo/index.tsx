@@ -2,6 +2,7 @@ import React, { useEffect, useState, Fragment } from 'react';
 
 import requests from '../../services/requests';
 import Sprite from '../../components/Sprite';
+import Loading from '../../components/Loading';
 
 import MoveBadge from './MoveBadge';
 import TypeBadge from './TypeBadge';
@@ -16,12 +17,15 @@ import {
 	PokemonAbilitiesView,
 	PokemonMovesView,
 	PokemonTypeView,
+	scrollViewContentContainerStyle,
+	ErrorContainer,
+	ErrorMessage,
 } from './styles';
-import Loading from '../../components/Loading';
 
 const PokemonInfo: React.FC<Props> = ({ route }) => {
 	const { name } = route.params;
 	const [loading, setLoading] = useState(false);
+	const [requestError, setRequestError] = useState(false);
 	const [pokemon, setPokemon] = useState<Pokemon>(PokemonDefault);
 
 	useEffect(() => {
@@ -30,10 +34,10 @@ const PokemonInfo: React.FC<Props> = ({ route }) => {
 			try {
 				const response = await requests.getPokemon({ name });
 				setPokemon(response);
-
 				setLoading(false);
 			} catch (error: any) {
 				setLoading(false);
+				setRequestError(true);
 				console.error(error.response ? error.response.data : error);
 			}
 		}
@@ -44,7 +48,7 @@ const PokemonInfo: React.FC<Props> = ({ route }) => {
 		<Container
 			showsHorizontalScrollIndicator={false}
 			showsVerticalScrollIndicator={false}
-			contentContainerStyle={{ paddingBottom: 20 }}>
+			contentContainerStyle={scrollViewContentContainerStyle}>
 			{!loading && pokemon && pokemon.abilities ? (
 				<Fragment>
 					{/* sprite & name */}
@@ -96,7 +100,19 @@ const PokemonInfo: React.FC<Props> = ({ route }) => {
 					</SectionView>
 				</Fragment>
 			) : (
-				<Loading />
+				<Fragment>
+					{!requestError ? (
+						<ErrorContainer>
+							<ErrorMessage>
+								{
+									'Falha ao retornar informacoes do Pokemon. Verifique a conexao com internet ou contate o suporte.'
+								}
+							</ErrorMessage>
+						</ErrorContainer>
+					) : (
+						<Loading />
+					)}
+				</Fragment>
 			)}
 		</Container>
 	);

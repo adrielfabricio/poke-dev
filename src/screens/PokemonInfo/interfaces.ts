@@ -14,6 +14,11 @@ type Ability = {
 	pokemon: any;
 };
 
+type Type = {
+	name: string;
+	url: string;
+};
+
 type Moves = {
 	move: {
 		name: string;
@@ -38,6 +43,11 @@ type PokemonSprites = {
 	back_shiny_female: string;
 };
 
+type PokemonType = {
+	slot: number;
+	type: Type;
+};
+
 export interface Pokemon {
 	id: number;
 	name: string;
@@ -55,7 +65,7 @@ export interface Pokemon {
 	species: Object;
 	sprites: PokemonSprites;
 	stats: Array<Object>;
-	types: Array<Object>;
+	types: Array<PokemonType>;
 	past_types: Array<Object>;
 }
 
