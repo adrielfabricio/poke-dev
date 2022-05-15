@@ -18,7 +18,8 @@ export const TitleView = styled.View<IHeaderStyleProps>(props => ({
 
 export const RightButton = styled.Pressable({
 	paddingHorizontal: 20,
-	paddingVertical: 15,
+	paddingVertical: 18,
+	zIndex: 9999,
 });
 
 export const Title = styled.Text<IHeaderStyleProps>(props => ({

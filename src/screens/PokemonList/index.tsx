@@ -96,6 +96,7 @@ const PokemonList: React.FC<Props> = ({ navigation }) => {
 					onEndReached={getPokemons}
 					onEndReachedThreshold={0.1}
 					ListFooterComponent={renderFooter}
+					showsVerticalScrollIndicator={false}
 				/>
 			) : (
 				<ErrorContainer>
